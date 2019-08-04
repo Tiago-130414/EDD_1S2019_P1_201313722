@@ -25,15 +25,19 @@ class ListaDoble:
 
         self.cabezaListaD = nuevo_nodo    
 
+        print("agregado con exito al inicio")
+
     def agregarFinal(self,posicionX,posicionY):
         #agrega al final de la lista
-        nuevo_nodo = NodoD(posicionX,posicionY)
-        nuevo_nodo.siguiente = None
+        nuevo_nodo = NodoD(posicionX,posicionY) 
         last = self.cabezaListaD
+        nuevo_nodo.siguiente = None
 
         if self.cabezaListaD is None:
             nuevo_nodo.anterior = None
             self.cabezaListaD = nuevo_nodo
+            print("agregado con exito al final")
+
             return
 
         while (last.siguiente is not None):
@@ -41,6 +45,66 @@ class ListaDoble:
 
         last.siguiente = nuevo_nodo
         nuevo_nodo.anterior = last        
-        print("prueba")
 
-    
+        print("agregado con exito al final")
+
+    def mostrar (self, nodo):
+        while (nodo is not None):
+            print(str(nodo.posX) + ',' + str(nodo.posY))
+            last = nodo
+            nodo = nodo.siguiente
+           
+        print("De regreso: ")
+        while(last is not None):
+            print(str(last.posX) + ',' + str(last.posY))
+            last = last.anterior
+
+    def eliminarPrincipio(self):
+        if(self.cabezaListaD is not None):
+            primero = self.cabezaListaD
+            primero = primero.siguiente
+            primero.anterior = None
+            self.cabezaListaD = primero
+
+    def eliminarFinal(self, nodo):
+        while(nodo is not None):
+            last = nodo
+            nodo = nodo.siguiente
+        last = last.anterior
+        last.siguiente = None
+
+    def listG(self,node):
+        cad =""
+        while(node is not None):
+           cad += "Nodo"+str(node.posX) +"C"+str(node.posY)+ "[label=\""+str(node.posX)+","+str(node.posY)+"\"]"+"\n" 
+           node = node.siguiente
+        return cad
+
+    def listarElementosLD(self,node):
+        t = ""
+        while(node is not None):
+           if(node.siguiente!=None):
+                t += "Nodo"+str(node.posX) +"C"+str(node.posY)+"->"+"Nodo"+str(node.siguiente.posX) +"C"+str(node.siguiente.posY)+"\n" 
+                t += "Nodo"+str(node.siguiente.posX) +"C"+str(node.siguiente.posY)+"->"+"Nodo"+str(node.posX) +"C"+str(node.posY)+"\n"      
+           node = node.siguiente
+        return t
+
+    def graficarListaDoble(self):
+        listado = self.listarElementosLD(self.cabezaListaD)
+        ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaLD.dot"
+        archivo = open(ruta_Grafica_LD,'w')
+        archivo.writelines("digraph{\n")
+        archivo.write("rankdir=LR;\n")
+        #archivo.write("labelloc=\"t\";\n")
+        archivo.write("subgraph cluster_0{")
+        archivo.write("style=filled;")
+        archivo.write("color = lightgrey;")  
+        archivo.write("node[shape=rectangle]\n")
+        archivo.write(self.listG(self.cabezaListaD))    
+        archivo.write(listado)
+        archivo.write("label = \"Lista Doblemente Enlazada\";\n")
+        archivo.write("}\n")   
+        archivo.write("}\n")   
+        archivo.close()
+
+
