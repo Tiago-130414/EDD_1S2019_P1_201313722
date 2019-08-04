@@ -76,7 +76,7 @@ class ListaDoble:
     def listG(self,node):
         cad =""
         while(node is not None):
-           cad += "Nodo"+str(node.posX) +"C"+str(node.posY)+ "[label=\""+str(node.posX)+","+str(node.posY)+"\"]"+"\n" 
+           cad += "Nodo"+str(node.posX) +"C"+str(node.posY)+ "[label=\""+str(node.posX)+","+str(node.posY)+"\"style = filled, fillcolor = \"orange:red\"];"+"\n" 
            node = node.siguiente
         return cad
 
@@ -106,5 +106,3 @@ class ListaDoble:
         archivo.write("}\n")   
         archivo.write("}\n")   
         archivo.close()
-
-
