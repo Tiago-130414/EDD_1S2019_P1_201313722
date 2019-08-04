@@ -1,24 +1,27 @@
 digraph{
 rankdir=LR;
-subgraph cluster_0{style=filled;color = lightgrey;node[shape=rectangle]
+subgraph cluster_0{
+style=filled;
+color = lightgrey;
+node[shape=rectangle];
 Nodohola[label="hola"style = filled, fillcolor = "red:blue"];
 Nodohola1[label="hola1"style = filled, fillcolor = "red:blue"];
 Nodohola2[label="hola2"style = filled, fillcolor = "red:blue"];
 Nodohola3[label="hola3"style = filled, fillcolor = "red:blue"];
 Nodohola4[label="hola4"style = filled, fillcolor = "red:blue"];
 Nodohola5[label="hola5"style = filled, fillcolor = "red:blue"];
-Nodohola->Nodohola1
-Nodohola1->Nodohola
-Nodohola1->Nodohola2
-Nodohola2->Nodohola1
-Nodohola2->Nodohola3
-Nodohola3->Nodohola2
-Nodohola3->Nodohola4
-Nodohola4->Nodohola3
-Nodohola4->Nodohola5
-Nodohola5->Nodohola4
-Nodohola5->Nodohola
-Nodohola->Nodohola5
+Nodohola->Nodohola1;
+Nodohola1->Nodohola;
+Nodohola1->Nodohola2;
+Nodohola2->Nodohola1;
+Nodohola2->Nodohola3;
+Nodohola3->Nodohola2;
+Nodohola3->Nodohola4;
+Nodohola4->Nodohola3;
+Nodohola4->Nodohola5;
+Nodohola5->Nodohola4;
+Nodohola5->Nodohola;
+Nodohola->Nodohola5;
 label = "Lista Circular Doblemente Enlazada";
 }
 }

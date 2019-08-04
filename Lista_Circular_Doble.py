@@ -50,8 +50,8 @@ class Lista_Circular:
         cad =""
         if(self.cabezaLCD is not None):
              while(True):
-                cad+= "Nodo"+str(nodo.usuario)+"->"+"Nodo"+str(nodo.siguiente.usuario)+"\n"
-                cad+= "Nodo"+str(nodo.siguiente.usuario)+"->"+"Nodo"+str(nodo.usuario)+"\n"
+                cad+= "Nodo"+str(nodo.usuario)+"->"+"Nodo"+str(nodo.siguiente.usuario)+";\n"
+                cad+= "Nodo"+str(nodo.siguiente.usuario)+"->"+"Nodo"+str(nodo.usuario)+";\n"
                 nodo = nodo.siguiente
                 if(nodo==self.cabezaLCD):
                     break
@@ -64,10 +64,10 @@ class Lista_Circular:
         archivo.writelines("digraph{\n")
         archivo.write("rankdir=LR;\n")
         #archivo.write("labelloc=\"t\";\n")
-        archivo.write("subgraph cluster_0{")
-        archivo.write("style=filled;")
-        archivo.write("color = lightgrey;")  
-        archivo.write("node[shape=rectangle]\n")
+        archivo.write("subgraph cluster_0{\n")
+        archivo.write("style=filled;\n")
+        archivo.write("color = lightgrey;\n")  
+        archivo.write("node[shape=rectangle];\n")
         archivo.write(self.listarNodo(self.cabezaLCD))    
         archivo.write(listado)
         archivo.write("label = \"Lista Circular Doblemente Enlazada\";\n")

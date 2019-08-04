@@ -2,8 +2,8 @@ import os
 import sys
 from Lista_Enlazada_Doble import ListaDoble
 from Lista_Circular_Doble import Lista_Circular
-
-lista = ListaDoble()
+from pila import Pila
+"""lista = ListaDoble()
 lista.agregarFinal(10,2)
 lista.agregarFinal(10,3)
 lista.agregarPrincipio(10,1)
@@ -24,4 +24,16 @@ listaC.agregarFinal("hola4")
 listaC.agregarFinal("hola5")
 listaC.mostrarLCD(listaC.cabezaLCD)
 listaC.graficarLCD()
-os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")
+os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")"""
+
+objP = Pila()
+objP.apilar(10,2)
+objP.apilar(10,3)
+objP.apilar(10,4)
+objP.apilar(10,5)
+objP.mostrarPila()
+objP.desapilar()
+objP.desapilar()
+objP.desapilar()
+objP.desapilar()
+objP.mostrarPila()

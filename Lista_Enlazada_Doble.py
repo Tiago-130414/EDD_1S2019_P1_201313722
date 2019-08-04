@@ -75,19 +75,49 @@ class ListaDoble:
 
     def listG(self,node):
         cad =""
+        cad+= self.agregarPNull()
         while(node is not None):
            cad += "Nodo"+str(node.posX) +"C"+str(node.posY)+ "[label=\""+str(node.posX)+","+str(node.posY)+"\"style = filled, fillcolor = \"orange:red\"];"+"\n" 
            node = node.siguiente
+        cad+= self.agregarUNull()   
         return cad
 
     def listarElementosLD(self,node):
         t = ""
+        t+=self.agregarPrimerNull(self.cabezaListaD)
         while(node is not None):
            if(node.siguiente!=None):
-                t += "Nodo"+str(node.posX) +"C"+str(node.posY)+"->"+"Nodo"+str(node.siguiente.posX) +"C"+str(node.siguiente.posY)+"\n" 
-                t += "Nodo"+str(node.siguiente.posX) +"C"+str(node.siguiente.posY)+"->"+"Nodo"+str(node.posX) +"C"+str(node.posY)+"\n"      
+                t += "Nodo"+str(node.posX) +"C"+str(node.posY)+"->"+"Nodo"+str(node.siguiente.posX) +"C"+str(node.siguiente.posY)+";\n" 
+                t += "Nodo"+str(node.siguiente.posX) +"C"+str(node.siguiente.posY)+"->"+"Nodo"+str(node.posX) +"C"+str(node.posY)+";\n"      
            node = node.siguiente
+        t+=self.agregarUltimoNull(self.cabezaListaD)
         return t
+
+    def agregarPrimerNull(self,nodo):
+        cad=""
+        while(nodo is not None):
+            if(nodo==self.cabezaListaD):
+                cad = "NodoPN->"+ "Nodo"+str(nodo.posX) +"C"+str(nodo.posY)+"[dir=back];\n"
+                break
+            nodo = nodo.siguiente    
+        return cad
+
+    def agregarPNull(self):
+        cad = "NodoPN"+"[label=\""+"NULL"+"\"style = filled, fillcolor = \"orange:red\"];"+"\n"
+        return cad   
+
+    def agregarUNull(self):
+        cad = "NodoUN"+"[label=\""+"NULL"+"\"style = filled, fillcolor = \"orange:red\"];"+"\n"
+        return cad   
+
+    def agregarUltimoNull(self,nodo):
+        cad=""
+        while(nodo is not None):
+            if (nodo.siguiente==None):
+                cad = "Nodo"+str(nodo.posX) +"C"+str(nodo.posY)+"->NodoUN;\n"
+            nodo = nodo.siguiente
+                       
+        return cad        
 
     def graficarListaDoble(self):
         listado = self.listarElementosLD(self.cabezaListaD)
@@ -96,10 +126,10 @@ class ListaDoble:
         archivo.writelines("digraph{\n")
         archivo.write("rankdir=LR;\n")
         #archivo.write("labelloc=\"t\";\n")
-        archivo.write("subgraph cluster_0{")
-        archivo.write("style=filled;")
-        archivo.write("color = lightgrey;")  
-        archivo.write("node[shape=rectangle]\n")
+        archivo.write("subgraph cluster_0{\n")
+        archivo.write("style=filled;\n")
+        archivo.write("color = lightgrey;\n")  
+        archivo.write("node[shape=rectangle];\n")
         archivo.write(self.listG(self.cabezaListaD))    
         archivo.write(listado)
         archivo.write("label = \"Lista Doblemente Enlazada\";\n")
