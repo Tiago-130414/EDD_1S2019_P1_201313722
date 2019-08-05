@@ -30,3 +30,36 @@ class Pila:
             aux = aux.siguiente
         if(aux is None):
             print("Pila Vacia")    
+
+    def listadoPila(self):
+        cad =" |\n"
+        aux = self.head
+        while(aux!=None):
+            cad+=str(aux.posX) +","+str(aux.posY)
+            if(aux.siguiente!=None):
+                cad+="|\n"
+            aux = aux.siguiente
+        if(aux is None):
+            print("Pila Vacia")
+        return cad    
+
+
+    def graficarPila(self):
+        ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaPila.dot"
+        archivo = open(ruta_Grafica_LD,'w')
+        archivo.writelines("digraph D{\n")
+        archivo.write("rankdir=TB;\n")
+        archivo.write("labelloc=\"t\";\n")
+        archivo.write("subgraph cluster_0{\n")
+        archivo.write("style=filled;\n")
+        archivo.write("color = lightgrey;\n")  
+        archivo.write("node[shape=record,style = filled, fillcolor = \"red:orange\"];\n")
+        archivo.write("node_GP[shape = record \n")    
+        archivo.write("label=\"{\n")
+        archivo.write(self.listadoPila())
+        archivo.write("}\"\n")
+        archivo.write("];\n")    
+        archivo.write("label = \"Pila\";\n")
+        archivo.write("}\n")   
+        archivo.write("}\n")   
+        archivo.close()          

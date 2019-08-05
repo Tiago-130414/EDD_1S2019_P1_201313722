@@ -1,0 +1,18 @@
+digraph D{
+rankdir=TB;
+labelloc="t";
+subgraph cluster_0{
+style=filled;
+color = lightgrey;
+node[shape=record,style = filled, fillcolor = "red:orange"];
+node_GP[shape = record 
+label="{
+ |
+10,5|
+10,4|
+10,3|
+10,2}"
+];
+label = "Pila";
+}
+}

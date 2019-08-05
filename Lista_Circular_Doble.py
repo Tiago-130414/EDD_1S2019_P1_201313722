@@ -63,7 +63,7 @@ class Lista_Circular:
         archivo = open(ruta_Grafica_LD,'w')
         archivo.writelines("digraph{\n")
         archivo.write("rankdir=LR;\n")
-        #archivo.write("labelloc=\"t\";\n")
+        archivo.write("labelloc=\"t\";\n")
         archivo.write("subgraph cluster_0{\n")
         archivo.write("style=filled;\n")
         archivo.write("color = lightgrey;\n")  
