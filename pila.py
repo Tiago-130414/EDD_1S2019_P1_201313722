@@ -53,7 +53,7 @@ class Pila:
         archivo.write("subgraph cluster_0{\n")
         archivo.write("style=filled;\n")
         archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=record,style = filled, fillcolor = \"red:orange\"];\n")
+        archivo.write("node[shape=record,style = filled, fillcolor = \"purple:red\"];\n")
         archivo.write("node_GP[shape = record \n")    
         archivo.write("label=\"{\n")
         archivo.write(self.listadoPila())
