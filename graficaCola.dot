@@ -5,17 +5,9 @@ subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=rectangle];
-Nodosantiago1[label="santiago1,10"style = filled, fillcolor = "purple:blue"];
-Nodosantiago2[label="santiago2,10"style = filled, fillcolor = "purple:blue"];
-Nodosantiago3[label="santiago3,10"style = filled, fillcolor = "purple:blue"];
-Nodosantiago4[label="santiago4,10"style = filled, fillcolor = "purple:blue"];
-Nodosantiago5[label="santiago5,10"style = filled, fillcolor = "purple:blue"];
+Nodofunciono[label="funciono,100"style = filled, fillcolor = "purple:blue"];
 NodoNULL[label="NULL"style = filled, fillcolor = "purple:blue"];
-Nodosantiago1->Nodosantiago2;
-Nodosantiago2->Nodosantiago3;
-Nodosantiago3->Nodosantiago4;
-Nodosantiago4->Nodosantiago5;
-Nodosantiago5->NodoNULL;
+Nodofunciono->NodoNULL;
 label = "Cola";
 }
 }

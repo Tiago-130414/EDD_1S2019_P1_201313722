@@ -11,29 +11,38 @@ class Cola:
         self.contar = 0
 
     def estaVacia(self):
-        return True if self.primero is None else False
+        return True if self.ultimo is None else False
 
     def encolar(self,usuario,puntuacion):
         nuevo_nodo = nodoCola(usuario,puntuacion)
         if (self.estaVacia()):
-            self.primero = nuevo_nodo
-            self.ultimo = nuevo_nodo
+            self.ultimo= nuevo_nodo
+            self.primero = self.ultimo
             print("primer nodo agregado")
             return
-        self.ultimo.siguiente = nuevo_nodo
-        self.ultimo = nuevo_nodo
+        self.primero.siguiente = nuevo_nodo
+        self.primero = nuevo_nodo
         print("nodo agregado")
 
     def desencolar(self):
         if(self.estaVacia()):
-            print("Cola Vacia")
-            return
+            print("cola se encuentra vacia")
+        elif(self.ultimo==self.primero):  
+            self.ultimo=None
+            self.primero = None  
+            print("se elimino unico nodo")
         else:
-            self.primero = self.primero.siguiente
-            print("elemento desencolado")
+            aux = self.ultimo
+            while(aux!=self.primero):
+                if(aux.siguiente==self.primero):
+                    aux.siguiente=None
+                    self.primero = aux
+                    print("eliminado primero")
+                    return
+                aux = aux.siguiente
 
     def mostrar(self):
-        aux = self.primero
+        aux = self.ultimo
         if(aux is None):
             print("Cola Vacia") 
         else:    
@@ -42,7 +51,7 @@ class Cola:
              aux = aux.siguiente
 
     def listadoScore(self):
-        aux = self.primero
+        aux = self.ultimo
         cad=""
         while(aux!=None):
             cad += "Nodo" + str(aux.usuario) + "[label=\""+str(aux.usuario)+","+str(aux.puntuacion)+"\"style = filled, fillcolor = \"purple:blue\"];"+"\n" 
@@ -51,7 +60,7 @@ class Cola:
         return cad
 
     def apuntar(self):
-        temp = self.primero
+        temp = self.ultimo
         cad=""
         while(temp != None):
             if(temp.siguiente!=None):
@@ -61,7 +70,7 @@ class Cola:
         return cad    
 
     def agregarUNull(self):
-        t = self.primero
+        t = self.ultimo
         cad=""
         while(t!=None):
             if(t.siguiente==None):
@@ -86,6 +95,3 @@ class Cola:
         archivo.write("}\n")   
         archivo.write("}\n")   
         archivo.close()   
-
-                      
-
