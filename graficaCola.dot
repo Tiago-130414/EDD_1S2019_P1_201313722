@@ -4,9 +4,9 @@ labelloc="t";
 subgraph cluster_0{
 style=filled;
 color = lightgrey;
-node[shape=rectangle];
-Nodofunciono[label="funciono,100"style = filled, fillcolor = "purple:blue"];
-NodoNULL[label="NULL"style = filled, fillcolor = "purple:blue"];
+node[shape=record];
+Nodofunciono[label="{funciono,100| }"style = filled, fillcolor = "purple:blue"];
+NodoNULL[label="NULL}"style = filled, fillcolor = "purple:blue"];
 Nodofunciono->NodoNULL;
 label = "Cola";
 }

@@ -4,7 +4,7 @@ from Lista_Enlazada_Doble import ListaDoble
 from Lista_Circular_Doble import Lista_Circular
 from pila import Pila
 from cola import Cola
-"""lista = ListaDoble()
+lista = ListaDoble()
 lista.agregarFinal(10,2)
 lista.agregarFinal(10,3)
 lista.agregarPrincipio(10,1)
@@ -25,16 +25,17 @@ listaC.agregarFinal("hola4")
 listaC.agregarFinal("hola5")
 listaC.mostrarLCD(listaC.cabezaLCD)
 listaC.graficarLCD()
-os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")"""
+os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")
+os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.png")
 
-"""objP = Pila()
+objP = Pila()
 objP.apilar(10,2)
 objP.apilar(11,3)
 objP.apilar(12,4)
 objP.apilar(13,5)
 objP.graficarPila()
 os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaPila.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaPila.png -Tpng -Gcharset=utf8")
-"""
+
 fila = Cola()
 fila.encolar("juan",15)
 fila.encolar("mario",20)

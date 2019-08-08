@@ -77,7 +77,7 @@ class ListaDoble:
         cad =""
         cad+= self.agregarPNull()
         while(node is not None):
-           cad += "Nodo"+str(node.posX) +"C"+str(node.posY)+ "[label=\""+str(node.posX)+","+str(node.posY)+"\"style = filled, fillcolor = \"orange:red\"];"+"\n" 
+           cad += "Nodo"+str(node.posX) +"C"+str(node.posY)+ "[label=\"{"+" |"+str(node.posX)+","+str(node.posY)+"| "+"}\"style = filled, fillcolor = \"orange:red\"];"+"\n" 
            node = node.siguiente
         cad+= self.agregarUNull()   
         return cad
@@ -129,7 +129,7 @@ class ListaDoble:
         archivo.write("subgraph cluster_0{\n")
         archivo.write("style=filled;\n")
         archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=rectangle];\n")
+        archivo.write("node[shape=record];\n")
         archivo.write(self.listG(self.cabezaListaD))    
         archivo.write(listado)
         archivo.write("label = \"Lista Doblemente Enlazada\";\n")

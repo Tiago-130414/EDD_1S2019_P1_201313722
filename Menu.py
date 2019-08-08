@@ -1,37 +1,67 @@
 import curses
+import time
 from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN
-stdscr = curses.initscr() #initialize console
-height = 20
-width = 60
-pos_y = 0
-pos_x = 0
-window = curses.newwin(height,width,pos_y,pos_x) #create a new curses window
-window.keypad(True)     #enable Keypad mode
-curses.noecho()         #prevent input from displaying in the screen
-curses.curs_set(0)      #cursor invisible (0)
-window.border(0)        #default border for our window
-window.nodelay(True)    #return -1 when no key is pressed
+from Scoreboard import mostrarInfo
+from UserSelection import seleccionar
+from Reports import reportar
+from BulkLoading import cargar
 
-key = KEY_RIGHT         #key defaulted to KEY_RIGHT
-pos_x = 5               #initial x position
-pos_y = 5               #initial y position
-window.addch(pos_y,pos_x,'*')   #print initial dot
-while key != 27:                #run program while [ESC] key is not pressed
-    window.timeout(100)         #delay of 100 milliseconds
-    keystroke = window.getch()  #get current key being pressed
-    if keystroke is not  -1:    #key is pressed
-        key = keystroke         #key direction changes
+def menu(window):
+    titulo(window,'M    E   N   U')
+    curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
+    window.addstr(7,21,'1.-  Play',curses.color_pair(2))
+    window.addstr(8,21,'2.-  Scoreboard',curses.color_pair(2))
+    window.addstr(9,21,'3.-  User Selection',curses.color_pair(2))
+    window.addstr(10,21,'4.-  Reports',curses.color_pair(2))
+    window.addstr(11,21,'5.-  Bulk Loading',curses.color_pair(2))
+    window.addstr(12,21,'6.-  Salir',curses.color_pair(2))
+    window.timeout(-1)
+def titulo(window,texto):
+    window.clear()
+    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) 
+    pintarVentana(window)
+    centro = round((60-len(texto))/2)
+    window.addstr(0,centro,texto,curses.color_pair(3))
+    
+def pintarVentana(window):
+    curses.init_pair(1,curses.COLOR_GREEN,curses.COLOR_BLACK)
+    window.attron(curses.color_pair(1))
+    window.border(0)
+    window.attroff(curses.color_pair(1))
+    window.refresh()        
 
-    window.addch(pos_y,pos_x,' ')       #erase last dot
-    if key == KEY_RIGHT:                #right direction
-        pos_x = pos_x + 1               #pos_x increase
-    elif key == KEY_LEFT:               #left direction
-        pos_x = pos_x - 1               #pos_x decrease
-    elif key == KEY_UP:                 #up direction
-        pos_y = pos_y - 1               #pos_y decrease
-    elif key == KEY_DOWN:               #down direction
-        pos_y = pos_y + 1               #pos_y increase
-    window.addch(pos_y,pos_x,'*')       #draw new dot
+stdscr = curses.initscr()
+curses.start_color()
+window = curses.newwin(20,60,0,0)
+curses.noecho()
+curses.curs_set(0)
+menu(window)
 
+opcion =-1
+while(opcion == -1):
+    opcion = window.getch()
+    if(opcion==49):
+        menu(window)
+        opcion = -1
+    elif(opcion==50):
+        mostrarInfo(window)
+        menu(window)
+        opcion = -1
+    elif(opcion==51):
+        seleccionar(window)
+        menu(window)
+        opcion = -1
+    elif(opcion==52):
+        reportar(window)
+        menu(window)
+        opcion = -1
+    elif(opcion==53):
+        cargar(window)
+        menu(window)
+        opcion = -1
+    elif(opcion==54):
+        pass    
+    else:
+        opcion = -1
 
-curses.endwin() #return terminal to previous state
+curses.endwin()

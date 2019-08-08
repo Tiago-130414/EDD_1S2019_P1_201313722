@@ -54,9 +54,9 @@ class Cola:
         aux = self.ultimo
         cad=""
         while(aux!=None):
-            cad += "Nodo" + str(aux.usuario) + "[label=\""+str(aux.usuario)+","+str(aux.puntuacion)+"\"style = filled, fillcolor = \"purple:blue\"];"+"\n" 
+            cad += "Nodo" + str(aux.usuario) + "[label=\"{"+str(aux.usuario)+","+str(aux.puntuacion)+"| "+"}\"style = filled, fillcolor = \"purple:blue\"];"+"\n" 
             aux = aux.siguiente
-        cad += "NodoNULL"+ "[label=\""+"NULL"+"\"style = filled, fillcolor = \"purple:blue\"];"+"\n"         
+        cad += "NodoNULL"+ "[label=\""+"NULL"+"}\"style = filled, fillcolor = \"purple:blue\"];"+"\n"         
         return cad
 
     def apuntar(self):
@@ -79,7 +79,6 @@ class Cola:
         return cad        
     
     def graficar(self):
-        #listado = self.listarElementosLD(self.cabezaListaD)
         ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaCola.dot"
         archivo = open(ruta_Grafica_LD,'w')
         archivo.writelines("digraph D{\n")
@@ -88,7 +87,7 @@ class Cola:
         archivo.write("subgraph cluster_0{\n")
         archivo.write("style=filled;\n")
         archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=rectangle];\n")
+        archivo.write("node[shape=record];\n")
         archivo.write(self.listadoScore())
         archivo.write(self.apuntar())   
         archivo.write("label = \"Cola\";\n")

@@ -40,7 +40,7 @@ class Lista_Circular:
         cad =""
         if(self.cabezaLCD is not None):
              while(True):
-                cad+= "Nodo"+str(nodo.usuario)+"[label=\""+str(nodo.usuario)+"\"style = filled, fillcolor = \"red:blue\"];"+"\n"
+                cad+= "Nodo"+str(nodo.usuario)+"[label=\"{"+" |"+str(nodo.usuario)+"| }"+"\"style = filled, fillcolor = \"red:blue\"];"+"\n"
                 nodo = nodo.siguiente
                 if(nodo==self.cabezaLCD):
                     break
@@ -67,7 +67,7 @@ class Lista_Circular:
         archivo.write("subgraph cluster_0{\n")
         archivo.write("style=filled;\n")
         archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=rectangle];\n")
+        archivo.write("node[shape=record];\n")
         archivo.write(self.listarNodo(self.cabezaLCD))    
         archivo.write(listado)
         archivo.write("label = \"Lista Circular Doblemente Enlazada\";\n")
