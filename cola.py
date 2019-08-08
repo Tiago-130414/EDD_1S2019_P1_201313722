@@ -1,6 +1,7 @@
+import os
+import sys
 class nodoCola:
     def __init__(self,usuario,puntuacion):
-        self.tamanio = 0
         self.usuario = usuario
         self.puntuacion = puntuacion
         self.siguiente = None
@@ -15,14 +16,21 @@ class Cola:
 
     def encolar(self,usuario,puntuacion):
         nuevo_nodo = nodoCola(usuario,puntuacion)
-        if (self.estaVacia()):
-            self.ultimo= nuevo_nodo
-            self.primero = self.ultimo
-            print("primer nodo agregado")
-            return
-        self.primero.siguiente = nuevo_nodo
-        self.primero = nuevo_nodo
-        print("nodo agregado")
+        if(self.contar<10):
+            if (self.estaVacia()):
+                self.primero = nuevo_nodo
+                self.ultimo = self.primero
+                self.contar+=1
+                print("primer nodo agregado")
+                return
+            nuevo_nodo.siguiente = self.ultimo
+            self.ultimo = nuevo_nodo
+            self.contar+=1
+            print("nodo agregado")
+        else:
+            self.desencolar()
+            nuevo_nodo.siguiente = self.ultimo
+            self.ultimo = nuevo_nodo    
 
     def desencolar(self):
         if(self.estaVacia()):
@@ -79,18 +87,23 @@ class Cola:
         return cad        
     
     def graficar(self):
-        ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaCola.dot"
-        archivo = open(ruta_Grafica_LD,'w')
-        archivo.writelines("digraph D{\n")
-        archivo.write("rankdir=LR;\n")
-        archivo.write("labelloc=\"t\";\n")
-        archivo.write("subgraph cluster_0{\n")
-        archivo.write("style=filled;\n")
-        archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=record];\n")
-        archivo.write(self.listadoScore())
-        archivo.write(self.apuntar())   
-        archivo.write("label = \"Cola\";\n")
-        archivo.write("}\n")   
-        archivo.write("}\n")   
-        archivo.close()   
+        if(self.estaVacia()):
+            return
+        else:
+            ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaCola.dot"
+            archivo = open(ruta_Grafica_LD,'w')
+            archivo.writelines("digraph D{\n")
+            archivo.write("rankdir=LR;\n")
+            archivo.write("labelloc=\"t\";\n")
+            archivo.write("subgraph cluster_0{\n")
+            archivo.write("style=filled;\n")
+            archivo.write("color = lightgrey;\n")  
+            archivo.write("node[shape=record];\n")
+            archivo.write(self.listadoScore())
+            archivo.write(self.apuntar())   
+            archivo.write("label = \"Cola\";\n")
+            archivo.write("}\n")   
+            archivo.write("}\n")   
+            archivo.close()
+            os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaCola.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaCola.png -Tpng -Gcharset=utf8")
+            os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaCola.png")   

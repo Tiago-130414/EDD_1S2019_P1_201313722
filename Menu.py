@@ -44,6 +44,14 @@ fila.encolar("santiago1",10)
 fila.encolar("santiago2",11)
 fila.encolar("santiago3",12)
 fila.encolar("santiago4",13)
+fila.encolar("santiago5",10)
+fila.encolar("santiago6",11)
+fila.encolar("santiago7",12)
+fila.encolar("santiago8",13)
+fila.encolar("santiago9",10)
+fila.encolar("santiago10",11)
+fila.encolar("santiago11",12)
+fila.encolar("santiago12",13)
 
 opcion =-1
 while(opcion == -1):
@@ -64,7 +72,7 @@ while(opcion == -1):
         opcion = -1
     elif(opcion==52):
         #reportes
-        reportar(window)
+        reportar(window,fila)
         menu(window)
         opcion = -1
     elif(opcion==53):
