@@ -1,9 +1,15 @@
 import curses
 import time
 
-def mostrarInfo(window):
+def mostrarInfo(window,cola):
     titulo(window,'S c o r e    B o a r d')
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
+    window.addstr(3,21,'NAME        SCORE',curses.color_pair(2)) #cabecera
+    pos =5
+    while(cola != None):
+        window.addstr(pos,21,str(cola.usuario)+"\t\t"+str(cola.puntuacion),curses.color_pair(2))
+        pos+=1  
+        cola = cola.siguiente
     salida = window.getch()
     while salida!=27:
         salida = window.getch()
@@ -21,10 +27,3 @@ def pintarVentana(window):
     window.border(0)
     window.attroff(curses.color_pair(1))
     window.refresh()     
-
-"""stdscr = curses.initscr()
-curses.start_color()
-window = curses.newwin(20,60,0,0)
-curses.noecho()
-curses.curs_set(0)
-mostrarInfo(window)"""        

@@ -5,6 +5,9 @@ from Scoreboard import mostrarInfo
 from UserSelection import seleccionar
 from Reports import reportar
 from BulkLoading import cargar
+#estructuras
+from cola import Cola
+
 
 def menu(window):
     titulo(window,'M    E   N   U')
@@ -36,30 +39,41 @@ window = curses.newwin(20,60,0,0)
 curses.noecho()
 curses.curs_set(0)
 menu(window)
+fila = Cola()
+fila.encolar("santiago1",10)
+fila.encolar("santiago2",11)
+fila.encolar("santiago3",12)
+fila.encolar("santiago4",13)
 
 opcion =-1
 while(opcion == -1):
     opcion = window.getch()
     if(opcion==49):
+        #play
         menu(window)
         opcion = -1
     elif(opcion==50):
-        mostrarInfo(window)
+        #scoreboard
+        mostrarInfo(window,fila.ultimo)
         menu(window)
         opcion = -1
     elif(opcion==51):
+        #seleccion usuario
         seleccionar(window)
         menu(window)
         opcion = -1
     elif(opcion==52):
+        #reportes
         reportar(window)
         menu(window)
         opcion = -1
     elif(opcion==53):
+        #carga masiva
         cargar(window)
         menu(window)
         opcion = -1
     elif(opcion==54):
+        #salida
         pass    
     else:
         opcion = -1
