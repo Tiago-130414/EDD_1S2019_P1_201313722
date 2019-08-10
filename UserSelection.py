@@ -1,12 +1,25 @@
 import curses
 import time
-
-def seleccionar(window):
+from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN
+def seleccionar(window,listaCD = object):
     titulo(window,'U s e r  S e l e c t i o n')
-    curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
-    salida = window.getch()
-    while salida!=27:
+    aux = listaCD.cabezaLCD
+    pintarUsuario(window,aux)
+    while True:
         salida = window.getch()
+        if(salida == KEY_LEFT):
+                #izquierda
+                titulo(window,'U s e r  S e l e c t i o n')
+                aux = aux.anterior
+                pintarUsuario(window,aux)        
+        if(salida == KEY_RIGHT):
+                #derecha
+                titulo(window,'U s e r  S e l e c t i o n')
+                aux = aux.siguiente
+                pintarUsuario(window,aux)        
+        if(salida == 27):
+                #salida
+                break
     
 def titulo(window,texto):
     window.clear()
@@ -21,3 +34,11 @@ def pintarVentana(window):
     window.border(0)
     window.attroff(curses.color_pair(1))
     window.refresh()     
+
+def pintarUsuario(window,nodo):
+        curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK)
+        texto = nodo.usuario
+        centro = round((60-len(texto))/2)
+        window.addstr(9,23,"<--"+texto+"-->",curses.color_pair(2))
+        window.refresh()        
+       

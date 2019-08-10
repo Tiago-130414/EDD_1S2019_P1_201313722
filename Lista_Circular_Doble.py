@@ -1,3 +1,5 @@
+import os
+import sys
 class nodoLCD:
     def __init__(self,usuario):
         self.usuario=usuario
@@ -23,9 +25,10 @@ class Lista_Circular:
         while(last.siguiente!=self.cabezaLCD):
             last = last.siguiente
 
-        last.siguiente = nuevo_nodo
         nuevo_nodo.anterior = last
-        nuevo_nodo.siguiente = self.cabezaLCD       
+        nuevo_nodo.siguiente = self.cabezaLCD
+        last.siguiente = nuevo_nodo
+        self.cabezaLCD.anterior = nuevo_nodo       
         print("agregado con exito al final")
 
     def mostrarLCD(self,node):
@@ -73,4 +76,6 @@ class Lista_Circular:
         archivo.write("label = \"Lista Circular Doblemente Enlazada\";\n")
         archivo.write("}\n")   
         archivo.write("}\n")   
-        archivo.close()          
+        archivo.close() 
+        os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")
+        os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png")         

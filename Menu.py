@@ -7,6 +7,8 @@ from Reports import reportar
 from BulkLoading import cargar
 #estructuras
 from cola import Cola
+from Lista_Circular_Doble import Lista_Circular
+from leerArchivo import lector
 
 
 def menu(window):
@@ -36,22 +38,16 @@ def pintarVentana(window):
 stdscr = curses.initscr()
 curses.start_color()
 window = curses.newwin(20,60,0,0)
+window.keypad(True)
 curses.noecho()
 curses.curs_set(0)
 menu(window)
 fila = Cola()
-fila.encolar("santiago1",10)
-fila.encolar("santiago2",11)
-fila.encolar("santiago3",12)
-fila.encolar("santiago4",13)
-fila.encolar("santiago5",10)
-fila.encolar("santiago6",11)
-fila.encolar("santiago7",12)
-fila.encolar("santiago8",13)
-fila.encolar("santiago9",10)
-fila.encolar("santiago10",11)
-fila.encolar("santiago11",12)
-fila.encolar("santiago12",13)
+listaCircular = Lista_Circular()
+
+l = lector()
+l.leer(listaCircular)
+listaCircular.graficarLCD()
 
 opcion =-1
 while(opcion == -1):
@@ -67,7 +63,7 @@ while(opcion == -1):
         opcion = -1
     elif(opcion==51):
         #seleccion usuario
-        seleccionar(window)
+        seleccionar(window,listaCircular)
         menu(window)
         opcion = -1
     elif(opcion==52):

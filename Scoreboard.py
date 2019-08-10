@@ -1,6 +1,6 @@
 import curses
 import time
-
+from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN
 def mostrarInfo(window,cola):
     titulo(window,'S c o r e    B o a r d')
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 

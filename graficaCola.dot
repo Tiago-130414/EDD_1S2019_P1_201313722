@@ -5,27 +5,9 @@ subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=record];
-Nodosantiago12[label="{santiago12,13| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago11[label="{santiago11,12| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago10[label="{santiago10,11| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago9[label="{santiago9,10| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago8[label="{santiago8,13| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago7[label="{santiago7,12| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago6[label="{santiago6,11| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago5[label="{santiago5,10| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago4[label="{santiago4,13| }"style = filled, fillcolor = "purple:blue"];
-Nodosantiago3[label="{santiago3,12| }"style = filled, fillcolor = "purple:blue"];
+Nodofunciono[label="{funciono,100| }"style = filled, fillcolor = "purple:blue"];
 NodoNULL[label="NULL}"style = filled, fillcolor = "purple:blue"];
-Nodosantiago12->Nodosantiago11;
-Nodosantiago11->Nodosantiago10;
-Nodosantiago10->Nodosantiago9;
-Nodosantiago9->Nodosantiago8;
-Nodosantiago8->Nodosantiago7;
-Nodosantiago7->Nodosantiago6;
-Nodosantiago6->Nodosantiago5;
-Nodosantiago5->Nodosantiago4;
-Nodosantiago4->Nodosantiago3;
-Nodosantiago3->NodoNULL;
+Nodofunciono->NodoNULL;
 label = "Cola";
 }
 }
