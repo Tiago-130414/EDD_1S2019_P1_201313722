@@ -1,7 +1,8 @@
 import curses
-import time
-from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN
+from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN,KEY_ENTER
+usuario =" "
 def seleccionar(window,listaCD = object):
+    txt = ""    
     titulo(window,'U s e r  S e l e c t i o n')
     aux = listaCD.cabezaLCD
     pintarUsuario(window,aux)
@@ -11,12 +12,17 @@ def seleccionar(window,listaCD = object):
                 #izquierda
                 titulo(window,'U s e r  S e l e c t i o n')
                 aux = aux.anterior
-                pintarUsuario(window,aux)        
+                pintarUsuario(window,aux)
         if(salida == KEY_RIGHT):
                 #derecha
                 titulo(window,'U s e r  S e l e c t i o n')
                 aux = aux.siguiente
-                pintarUsuario(window,aux)        
+                pintarUsuario(window,aux)          
+        if(salida == 10):
+                #enter
+                txt = aux.usuario
+                print("presione enter")
+                return txt              
         if(salida == 27):
                 #salida
                 break

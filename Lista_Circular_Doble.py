@@ -9,6 +9,8 @@ class nodoLCD:
 class Lista_Circular:
     def __init__(self):
         self.cabezaLCD=None
+    def estaVacia(self):
+        return True if self.cabezaLCD is None else False    
 
     def agregarFinal(self,user):
         nuevo_nodo = nodoLCD(user)
@@ -61,21 +63,24 @@ class Lista_Circular:
         return cad          
 
     def graficarLCD(self):
-        listado = self.listadoUsr(self.cabezaLCD)
-        ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaLCD.dot"
-        archivo = open(ruta_Grafica_LD,'w')
-        archivo.writelines("digraph{\n")
-        archivo.write("rankdir=LR;\n")
-        archivo.write("labelloc=\"t\";\n")
-        archivo.write("subgraph cluster_0{\n")
-        archivo.write("style=filled;\n")
-        archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=record];\n")
-        archivo.write(self.listarNodo(self.cabezaLCD))    
-        archivo.write(listado)
-        archivo.write("label = \"Lista Circular Doblemente Enlazada\";\n")
-        archivo.write("}\n")   
-        archivo.write("}\n")   
-        archivo.close() 
-        os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")
-        os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png")         
+        if(self.estaVacia()):
+            return
+        else:
+            listado = self.listadoUsr(self.cabezaLCD)
+            ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaLCD.dot"
+            archivo = open(ruta_Grafica_LD,'w')
+            archivo.writelines("digraph{\n")
+            archivo.write("rankdir=LR;\n")
+            archivo.write("labelloc=\"t\";\n")
+            archivo.write("subgraph cluster_0{\n")
+            archivo.write("style=filled;\n")
+            archivo.write("color = lightgrey;\n")  
+            archivo.write("node[shape=record];\n")
+            archivo.write(self.listarNodo(self.cabezaLCD))    
+            archivo.write(listado)
+            archivo.write("label = \"Lista Circular Doblemente Enlazada\";\n")
+            archivo.write("}\n")   
+            archivo.write("}\n")   
+            archivo.close() 
+            os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")
+            os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png")         

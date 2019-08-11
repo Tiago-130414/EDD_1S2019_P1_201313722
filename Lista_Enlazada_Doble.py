@@ -13,6 +13,8 @@ class ListaDoble:
     def __init__(self):
         #constructor que inicializa nodo cabeza
         self.cabezaListaD = None
+    def estaVacia(self):
+        return True if self.cabezaListaD is None else False    
 
     def agregarPrincipio(self, posicionX, posicionY):
         #agrega al principio de la lista
@@ -120,19 +122,24 @@ class ListaDoble:
         return cad        
 
     def graficarListaDoble(self):
-        listado = self.listarElementosLD(self.cabezaListaD)
-        ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaLD.dot"
-        archivo = open(ruta_Grafica_LD,'w')
-        archivo.writelines("digraph{\n")
-        archivo.write("rankdir=LR;\n")
-        #archivo.write("labelloc=\"t\";\n")
-        archivo.write("subgraph cluster_0{\n")
-        archivo.write("style=filled;\n")
-        archivo.write("color = lightgrey;\n")  
-        archivo.write("node[shape=record];\n")
-        archivo.write(self.listG(self.cabezaListaD))    
-        archivo.write(listado)
-        archivo.write("label = \"Lista Doblemente Enlazada\";\n")
-        archivo.write("}\n")   
-        archivo.write("}\n")   
-        archivo.close()
+        if(self.estaVacia()):
+            return
+        else:
+            listado = self.listarElementosLD(self.cabezaListaD)
+            ruta_Grafica_LD = "C:/Users/santi/OneDrive/Desktop/EDD_1S2019_P1_201313722/graficaLD.dot"
+            archivo = open(ruta_Grafica_LD,'w')
+            archivo.writelines("digraph{\n")
+            archivo.write("rankdir=LR;\n")
+            archivo.write("labelloc=\"t\";\n")
+            archivo.write("subgraph cluster_0{\n")
+            archivo.write("style=filled;\n")
+            archivo.write("color = lightgrey;\n")  
+            archivo.write("node[shape=record];\n")
+            archivo.write(self.listG(self.cabezaListaD))    
+            archivo.write(listado)
+            archivo.write("label = \"Lista Doblemente Enlazada\";\n")
+            archivo.write("}\n")   
+            archivo.write("}\n")   
+            archivo.close() 
+            os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.png -Tpng -Gcharset=utf8")
+            os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.png")   
