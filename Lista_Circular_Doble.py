@@ -88,10 +88,12 @@ class Lista_Circular:
     def existe(self,usuario):
         last = self.cabezaLCD
         exist = False
-        while(last.siguiente!=self.cabezaLCD):
+        while(last!=self.cabezaLCD):
             if(last.usuario==usuario):
                 exit = True
                 print("lo encontre")
-                break
+                return exist
+                #break
             last = last.siguiente
-        return exist        
+            if(last.siguiente==self.cabezaLCD):
+                return exist        

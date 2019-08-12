@@ -1,7 +1,7 @@
 import curses
 import time
 
-def reportar(window, fila=object , usr = object):
+def reportar(window, fila=object , usr = object,listaD = object):
     titulo(window,'R e p o r t s')
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
@@ -15,7 +15,11 @@ def reportar(window, fila=object , usr = object):
         opcion = window.getch()
         if(opcion==49):
             #Snake Report
-            opcion = -1
+            if(usr.estaVacia()):
+                opcion=-1
+            else:
+                listaD.graficarListaDoble()
+                opcion = -1               
         elif(opcion==50):
             #score Report
             opcion = -1

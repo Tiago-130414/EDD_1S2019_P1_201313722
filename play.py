@@ -2,41 +2,72 @@ import curses
 import time
 from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN,KEY_ENTER
 from curses.textpad import Textbox, rectangle
-def juego(window,usr,listaDoble=object):
+def juego(window,usr):
     if(len(usr) is 0):  
         usr = noExisteUSR(window)
         print("hola" + str(usr))
-        funcionalidad(window,usr)
         return usr
     else:
         print(str(usr))
-        funcionalidad(window,usr,listaDoble)
         return usr
 
 def funcionalidad(window,usr,listaDoble=object):
+    usr = usr.replace(' ','')
+    usr = usr.replace('\n','')
+    usr = usr.replace('\t','')
     usr ="SnakeReload"+usr       
     titulo(window,usr)
     salida = KEY_RIGHT
     posX=5
     posY=5
     snake="*"
-    window.addstr(posY,posX,snake)
+    crearSnakeInicial(posX,posY,listaDoble)
+    imprimeAsteriscos(window,snake,listaDoble)
     #salida = window.getch()
-    while(salida!=27):
-        window.timeout(10)
+    while(salida!=27):  
+        window.timeout(100)
         mov = window.getch()
         if(mov is not -1):
            salida = mov
-        window.addstr(posY,posX,' ')
+        
         if(salida==KEY_RIGHT):
+                ultX = listaDoble.ultimoNodoX()
+                ultY = listaDoble.ultimoNodoY() 
+                print("ult posx:" +str(ultX))  
                 posX = posX+1
+                listaDoble.agregarPrincipio(posX,posY)
+                imprimeAsteriscos(window,snake,listaDoble)  
+                window.addstr(ultY,ultX," ")
+                listaDoble.eliminarFinal()
         elif(salida==KEY_LEFT):
+                ultX = listaDoble.ultimoNodoX()
+                ultY = listaDoble.ultimoNodoY() 
+                print("ult posx:" +str(ultX))  
                 posX = posX-1 
+                listaDoble.agregarPrincipio(posX,posY)
+                imprimeAsteriscos(window,snake,listaDoble)  
+                window.addstr(ultY,ultX," ")
+                listaDoble.eliminarFinal()
         elif(salida==KEY_UP):
+                ultX = listaDoble.ultimoNodoX()
+                ultY = listaDoble.ultimoNodoY() 
+                print("ult posy:" +str(ultY))  
                 posY = posY-1
+                listaDoble.agregarPrincipio(posX,posY)
+                imprimeAsteriscos(window,snake,listaDoble)  
+                window.addstr(ultY,ultX," ")
+                listaDoble.eliminarFinal()
         elif(salida==KEY_DOWN):
-                posY = posY+1                 
-        window.addstr(posY,posX,snake)
+                ultX = listaDoble.ultimoNodoX()
+                ultY = listaDoble.ultimoNodoY() 
+                print("ult posy:" +str(ultY))  
+                posY = posY+1
+                listaDoble.agregarPrincipio(posX,posY)
+                imprimeAsteriscos(window,snake,listaDoble)  
+                window.addstr(ultY,ultX," ")
+                listaDoble.eliminarFinal()
+                
+        
     
 def titulo(window,texto):
     window.clear()
@@ -70,13 +101,21 @@ def noExisteUSR(window):
     persona = box.gather()
     return persona  
 
-def crearSnakeInicial(posX,posY,listaDoble = object):
+def crearSnakeInicial(posY,posX,listaDoble = object):
         listaDoble.agregarFinal(posX,posY)
         posX+=1
         listaDoble.agregarFinal(posX,posY)
         posX+=1
         listaDoble.agregarFinal(posX,posY)
 
-def cantidadAsteriscos(tamanio,listaDoble = object):
-        
+def imprimeAsteriscos(window,snake,listaDoble = object):
+    aux = listaDoble.cabezaListaD
+    while(aux is not None):
+        posX = aux.posX
+        posY = aux.posY
+        window.addstr(posY,posX,snake)
+        aux = aux.siguiente
+      
+
+def posicionesAumentanX(posX,posY,listaDoble=object):
         pass        

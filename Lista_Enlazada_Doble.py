@@ -2,7 +2,7 @@ import sys
 import os
 class NodoD:
   def __init__(self, posX,posY):
-    #nodo de tipo lista doble  
+    #nodo de tipo lista doble 
     self.posX = posX
     self.posY = posY
     self.siguiente = None
@@ -70,12 +70,14 @@ class ListaDoble:
             primero.anterior = None
             self.cabezaListaD = primero
 
-    def eliminarFinal(self, nodo):
-        while(nodo is not None):
-            last = nodo
-            nodo = nodo.siguiente
-        last = last.anterior
-        last.siguiente = None
+    def eliminarFinal(self):
+        aux = self.cabezaListaD
+        while(aux is not None):
+            if(aux.siguiente is None):
+                aux = aux.anterior
+                aux.siguiente = None
+                return
+            aux = aux.siguiente   
 
     def listG(self,node):
         cad =""
@@ -149,3 +151,21 @@ class ListaDoble:
 
     def tamano(self):
         return self.tamanio        
+
+    def ultimoNodoX(self):
+        posX=0
+        aux = self.cabezaListaD
+        while(aux is not None):
+            if(aux.siguiente is None):
+                posX = aux.posX
+                return posX
+            aux = aux.siguiente    
+
+    def ultimoNodoY(self):
+        posY=0
+        aux = self.cabezaListaD
+        while(aux is not None):
+            if(aux.siguiente is None):
+                posY = aux.posY
+                return posY
+            aux = aux.siguiente        

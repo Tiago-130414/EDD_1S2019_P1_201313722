@@ -5,6 +5,7 @@ from Scoreboard import mostrarInfo
 from UserSelection import seleccionar
 from Reports import reportar
 from BulkLoading import cargar
+from play import funcionalidad
 #estructuras
 from cola import Cola
 from Lista_Circular_Doble import Lista_Circular
@@ -53,9 +54,10 @@ while(opcion == -1):
     opcion = window.getch()
     if(opcion==49):
         #play
-        usuario = juego(window,str(usuario),listaD)
+        usuario = juego(window,str(usuario))
         usuario = usuario.replace(' ','')
         usuario = usuario.replace('\n','')
+        funcionalidad(window,usuario,listaD)
         menu(window)
         if(listaCircular.estaVacia()):
             listaCircular.agregarFinal(usuario)
@@ -80,7 +82,7 @@ while(opcion == -1):
             opcion = -1    
     elif(opcion==52):
         #reportes
-        reportar(window,fila,listaCircular)
+        reportar(window,fila,listaCircular,listaD)
         menu(window)
         opcion = -1
     elif(opcion==53):

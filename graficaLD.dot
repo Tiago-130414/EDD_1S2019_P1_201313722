@@ -1,32 +1,30 @@
 digraph{
 rankdir=LR;
+labelloc="t";
 subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=record];
 NodoPN[label="NULL"style = filled, fillcolor = "orange:red"];
-Nodo10C0[label="{ |10,0| }"style = filled, fillcolor = "orange:red"];
-Nodo10C1[label="{ |10,1| }"style = filled, fillcolor = "orange:red"];
-Nodo10C2[label="{ |10,2| }"style = filled, fillcolor = "orange:red"];
-Nodo10C3[label="{ |10,3| }"style = filled, fillcolor = "orange:red"];
-Nodo10C4[label="{ |10,4| }"style = filled, fillcolor = "orange:red"];
-Nodo10C5[label="{ |10,5| }"style = filled, fillcolor = "orange:red"];
-Nodo10C6[label="{ |10,6| }"style = filled, fillcolor = "orange:red"];
+Nodo31C4[label="{ |31,4| }"style = filled, fillcolor = "orange:red"];
+Nodo31C5[label="{ |31,5| }"style = filled, fillcolor = "orange:red"];
+Nodo31C6[label="{ |31,6| }"style = filled, fillcolor = "orange:red"];
+Nodo31C7[label="{ |31,7| }"style = filled, fillcolor = "orange:red"];
+Nodo31C8[label="{ |31,8| }"style = filled, fillcolor = "orange:red"];
+Nodo31C9[label="{ |31,9| }"style = filled, fillcolor = "orange:red"];
 NodoUN[label="NULL"style = filled, fillcolor = "orange:red"];
-NodoPN->Nodo10C0[dir=back];
-Nodo10C0->Nodo10C1;
-Nodo10C1->Nodo10C0;
-Nodo10C1->Nodo10C2;
-Nodo10C2->Nodo10C1;
-Nodo10C2->Nodo10C3;
-Nodo10C3->Nodo10C2;
-Nodo10C3->Nodo10C4;
-Nodo10C4->Nodo10C3;
-Nodo10C4->Nodo10C5;
-Nodo10C5->Nodo10C4;
-Nodo10C5->Nodo10C6;
-Nodo10C6->Nodo10C5;
-Nodo10C6->NodoUN;
+NodoPN->Nodo31C4[dir=back];
+Nodo31C4->Nodo31C5;
+Nodo31C5->Nodo31C4;
+Nodo31C5->Nodo31C6;
+Nodo31C6->Nodo31C5;
+Nodo31C6->Nodo31C7;
+Nodo31C7->Nodo31C6;
+Nodo31C7->Nodo31C8;
+Nodo31C8->Nodo31C7;
+Nodo31C8->Nodo31C9;
+Nodo31C9->Nodo31C8;
+Nodo31C9->NodoUN;
 label = "Lista Doblemente Enlazada";
 }
 }
