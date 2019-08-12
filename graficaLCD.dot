@@ -5,6 +5,7 @@ subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=record];
+Nodosanti[label="{ |santi| }"style = filled, fillcolor = "red:blue"];
 NodoVictor[label="{ |Victor| }"style = filled, fillcolor = "red:blue"];
 NodoMario[label="{ |Mario| }"style = filled, fillcolor = "red:blue"];
 NodoJosue[label="{ |Josue| }"style = filled, fillcolor = "red:blue"];
@@ -18,6 +19,8 @@ NodoJuan [label="{ |Juan | }"style = filled, fillcolor = "red:blue"];
 NodoAndres[label="{ |Andres| }"style = filled, fillcolor = "red:blue"];
 NodoEstuardo[label="{ |Estuardo| }"style = filled, fillcolor = "red:blue"];
 NodoLuis[label="{ |Luis| }"style = filled, fillcolor = "red:blue"];
+Nodosanti->NodoVictor;
+NodoVictor->Nodosanti;
 NodoVictor->NodoMario;
 NodoMario->NodoVictor;
 NodoMario->NodoJosue;
@@ -42,8 +45,8 @@ NodoAndres->NodoEstuardo;
 NodoEstuardo->NodoAndres;
 NodoEstuardo->NodoLuis;
 NodoLuis->NodoEstuardo;
-NodoLuis->NodoVictor;
-NodoVictor->NodoLuis;
+NodoLuis->Nodosanti;
+Nodosanti->NodoLuis;
 label = "Lista Circular Doblemente Enlazada";
 }
 }

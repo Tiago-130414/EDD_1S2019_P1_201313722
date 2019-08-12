@@ -84,3 +84,14 @@ class Lista_Circular:
             archivo.close() 
             os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png -Tpng -Gcharset=utf8")
             os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLCD.png")         
+
+    def existe(self,usuario):
+        last = self.cabezaLCD
+        exist = False
+        while(last.siguiente!=self.cabezaLCD):
+            if(last.usuario==usuario):
+                exit = True
+                print("lo encontre")
+                break
+            last = last.siguiente
+        return exist        

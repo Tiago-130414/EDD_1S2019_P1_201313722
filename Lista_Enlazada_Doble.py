@@ -12,7 +12,9 @@ class ListaDoble:
     #lista para desplazarse en el tablero de snake
     def __init__(self):
         #constructor que inicializa nodo cabeza
+        self.tamanio = 0
         self.cabezaListaD = None
+
     def estaVacia(self):
         return True if self.cabezaListaD is None else False    
 
@@ -26,7 +28,7 @@ class ListaDoble:
             self.cabezaListaD.anterior = nuevo_nodo
 
         self.cabezaListaD = nuevo_nodo    
-
+        self.tamanio +=1
         print("agregado con exito al inicio")
 
     def agregarFinal(self,posicionX,posicionY):
@@ -39,7 +41,7 @@ class ListaDoble:
             nuevo_nodo.anterior = None
             self.cabezaListaD = nuevo_nodo
             print("agregado con exito al final")
-
+            self.tamanio +=1
             return
 
         while (last.siguiente is not None):
@@ -47,7 +49,7 @@ class ListaDoble:
 
         last.siguiente = nuevo_nodo
         nuevo_nodo.anterior = last        
-
+        self.tamanio +=1    
         print("agregado con exito al final")
 
     def mostrar (self, nodo):
@@ -122,6 +124,7 @@ class ListaDoble:
         return cad        
 
     def graficarListaDoble(self):
+
         if(self.estaVacia()):
             return
         else:
@@ -143,3 +146,6 @@ class ListaDoble:
             archivo.close() 
             os.system("dot C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.dot -o C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.png -Tpng -Gcharset=utf8")
             os.system("C:\\Users\\santi\\OneDrive\\Desktop\\EDD_1S2019_P1_201313722\\graficaLD.png")   
+
+    def tamano(self):
+        return self.tamanio        

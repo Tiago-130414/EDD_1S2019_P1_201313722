@@ -9,6 +9,7 @@ from BulkLoading import cargar
 from cola import Cola
 from Lista_Circular_Doble import Lista_Circular
 from leerArchivo import lector
+from Lista_Enlazada_Doble import ListaDoble
 usuario = ""
 def menu(window):
     titulo(window,'M    E   N   U')
@@ -41,19 +42,27 @@ window.keypad(True)
 curses.noecho()
 curses.curs_set(0)
 menu(window)
+#objetos para acceder a listas y a funcionalidad
 fila = Cola()
 listaCircular = Lista_Circular()
 l = lector()
-#l.leer(listaCircular)
-#listaCircular.graficarLCD()
-
+listaD = ListaDoble()
+#casos del menu
 opcion =-1
 while(opcion == -1):
     opcion = window.getch()
     if(opcion==49):
         #play
-        usuario = juego(window,str(usuario))
+        usuario = juego(window,str(usuario),listaD)
+        usuario = usuario.replace(' ','')
+        usuario = usuario.replace('\n','')
         menu(window)
+        if(listaCircular.estaVacia()):
+            listaCircular.agregarFinal(usuario)
+        elif(listaCircular.existe(usuario)==False):
+            listaCircular.agregarFinal(usuario)
+        else:         
+            opcion=-1  
         opcion = -1
     elif(opcion==50):
         #scoreboard
@@ -62,10 +71,13 @@ while(opcion == -1):
         opcion = -1
     elif(opcion==51):
         #seleccion usuario
-        usuario = seleccionar(window,listaCircular)
-        menu(window)
-        print(usuario)
-        opcion = -1
+        if(listaCircular.estaVacia()):
+            opcion = -1
+        else:
+            usuario = seleccionar(window,listaCircular)
+            menu(window)
+            print(usuario)
+            opcion = -1    
     elif(opcion==52):
         #reportes
         reportar(window,fila,listaCircular)

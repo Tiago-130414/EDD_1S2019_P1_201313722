@@ -1,7 +1,8 @@
 import curses
+import time
 from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN,KEY_ENTER
 from curses.textpad import Textbox, rectangle
-def juego(window,usr):
+def juego(window,usr,listaDoble=object):
     if(len(usr) is 0):  
         usr = noExisteUSR(window)
         print("hola" + str(usr))
@@ -9,16 +10,34 @@ def juego(window,usr):
         return usr
     else:
         print(str(usr))
-        funcionalidad(window,usr)
+        funcionalidad(window,usr,listaDoble)
         return usr
 
-def funcionalidad(window,usr):
-    titulo(window,'S n a k e  R e l o a d')
-    salida = window.getch()
+def funcionalidad(window,usr,listaDoble=object):
+    usr ="SnakeReload"+usr       
+    titulo(window,usr)
+    salida = KEY_RIGHT
+    posX=5
+    posY=5
+    snake="*"
+    window.addstr(posY,posX,snake)
+    #salida = window.getch()
     while(salida!=27):
-        salida = window.getch()
-
-
+        window.timeout(10)
+        mov = window.getch()
+        if(mov is not -1):
+           salida = mov
+        window.addstr(posY,posX,' ')
+        if(salida==KEY_RIGHT):
+                posX = posX+1
+        elif(salida==KEY_LEFT):
+                posX = posX-1 
+        elif(salida==KEY_UP):
+                posY = posY-1
+        elif(salida==KEY_DOWN):
+                posY = posY+1                 
+        window.addstr(posY,posX,snake)
+    
 def titulo(window,texto):
     window.clear()
     curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) 
@@ -49,4 +68,15 @@ def noExisteUSR(window):
     box = Textbox(editwin)
     box.edit()
     persona = box.gather()
-    return persona   
+    return persona  
+
+def crearSnakeInicial(posX,posY,listaDoble = object):
+        listaDoble.agregarFinal(posX,posY)
+        posX+=1
+        listaDoble.agregarFinal(posX,posY)
+        posX+=1
+        listaDoble.agregarFinal(posX,posY)
+
+def cantidadAsteriscos(tamanio,listaDoble = object):
+        
+        pass        
