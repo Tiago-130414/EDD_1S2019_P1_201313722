@@ -1,7 +1,7 @@
 import curses
 import time
 
-def reportar(window, fila=object , usr = object,listaD = object):
+def reportar(window, fila=object , usr = object,listaD = object,pil=object):
     titulo(window,'R e p o r t s')
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
@@ -22,7 +22,11 @@ def reportar(window, fila=object , usr = object,listaD = object):
                 opcion = -1               
         elif(opcion==50):
             #score Report
-            opcion = -1
+            if(pil.estaVacia()):
+                opcion =-1
+            else:
+                pil.graficarPila()    
+                opcion = -1
         elif(opcion==51):
             #score board report 
             if(fila.estaVacia()):

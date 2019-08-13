@@ -11,6 +11,7 @@ from cola import Cola
 from Lista_Circular_Doble import Lista_Circular
 from leerArchivo import lector
 from Lista_Enlazada_Doble import ListaDoble
+from pila import Pila
 usuario = ""
 def menu(window):
     titulo(window,'M    E   N   U')
@@ -48,6 +49,9 @@ fila = Cola()
 listaCircular = Lista_Circular()
 l = lector()
 listaD = ListaDoble()
+comida = ListaDoble()
+comidaMala = ListaDoble()
+pil = Pila()
 #casos del menu
 opcion =-1
 while(opcion == -1):
@@ -57,7 +61,7 @@ while(opcion == -1):
         usuario = juego(window,str(usuario))
         usuario = usuario.replace(' ','')
         usuario = usuario.replace('\n','')
-        funcionalidad(window,usuario,listaD)
+        funcionalidad(window,usuario,listaD,comida,comidaMala,pil)
         menu(window)
         if(listaCircular.estaVacia()):
             listaCircular.agregarFinal(usuario)
@@ -82,7 +86,7 @@ while(opcion == -1):
             opcion = -1    
     elif(opcion==52):
         #reportes
-        reportar(window,fila,listaCircular,listaD)
+        reportar(window,fila,listaCircular,listaD,pil)
         menu(window)
         opcion = -1
     elif(opcion==53):

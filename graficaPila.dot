@@ -8,10 +8,11 @@ node[shape=record,style = filled, fillcolor = "purple:red"];
 node_GP[shape = record 
 label="{
  |
-13,5|
-12,4|
-11,3|
-10,2}"
+42,10|
+31,12|
+26,7|
+42,15|
+7,7}"
 ];
 label = "Pila";
 }

@@ -29,7 +29,7 @@ class ListaDoble:
 
         self.cabezaListaD = nuevo_nodo    
         self.tamanio +=1
-        print("agregado con exito al inicio")
+        #print("agregado con exito al inicio")
 
     def agregarFinal(self,posicionX,posicionY):
         #agrega al final de la lista
@@ -62,7 +62,7 @@ class ListaDoble:
         while(last is not None):
             print(str(last.posX) + ',' + str(last.posY))
             last = last.anterior
-
+            
     def eliminarPrincipio(self):
         if(self.cabezaListaD is not None):
             primero = self.cabezaListaD
@@ -74,8 +74,9 @@ class ListaDoble:
         aux = self.cabezaListaD
         while(aux is not None):
             if(aux.siguiente is None):
-                aux = aux.anterior
-                aux.siguiente = None
+                last = aux.anterior
+                aux.anterior = None
+                last.siguiente = None
                 return
             aux = aux.siguiente   
 
@@ -151,6 +152,9 @@ class ListaDoble:
 
     def tamano(self):
         return self.tamanio        
+
+    def limpiarLista(self):
+        self.cabezaListaD = None    
 
     def ultimoNodoX(self):
         posX=0
