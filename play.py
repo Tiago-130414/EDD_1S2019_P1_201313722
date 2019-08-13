@@ -37,7 +37,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
     mostrarComidaM(window,comidaMala)
     #salida = window.getch()
     while(salida!=27):  
-        window.timeout(200)
+        window.timeout(evaluarNivel(valP))
         mov = window.getch()
         if(mov is not -1):
            salida = mov      
@@ -409,7 +409,10 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()             
+        #elif(salida==112 or salida == 80):
                 
+                        
+
 def titulo(window,texto,usr,punteo):
     window.clear()
     curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) 
@@ -520,3 +523,11 @@ def mostrarComidaM(window,listaComida = object):
                         posY = aux.posY
                         window.addstr(posY,posX,'*')
                         aux = aux.siguiente   
+
+def evaluarNivel(punteo):
+        if(punteo <= 5):
+                return 200
+        elif(punteo<=10):
+                return 100
+        else:
+                return 75 
