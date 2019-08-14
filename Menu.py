@@ -6,6 +6,7 @@ from UserSelection import seleccionar
 from Reports import reportar
 from BulkLoading import cargar
 from play import funcionalidad
+from pausa import nodoPausa
 #estructuras
 from cola import Cola
 from Lista_Circular_Doble import Lista_Circular
@@ -13,6 +14,8 @@ from leerArchivo import lector
 from Lista_Enlazada_Doble import ListaDoble
 from pila import Pila
 usuario = ""
+punteo=0
+juegoN = True
 def menu(window):
     titulo(window,'M    E   N   U')
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK) 
@@ -35,7 +38,8 @@ def pintarVentana(window):
     window.attron(curses.color_pair(1))
     window.border(0)
     window.attroff(curses.color_pair(1))
-    window.refresh()        
+    window.refresh()       
+ 
 
 stdscr = curses.initscr()
 curses.start_color()
@@ -52,6 +56,7 @@ listaD = ListaDoble()
 comida = ListaDoble()
 comidaMala = ListaDoble()
 pil = Pila()
+nodo = nodoPausa(True)
 #casos del menu
 opcion =-1
 while(opcion == -1):
@@ -61,7 +66,8 @@ while(opcion == -1):
         usuario = juego(window,str(usuario))
         usuario = usuario.replace(' ','')
         usuario = usuario.replace('\n','')
-        funcionalidad(window,usuario,listaD,comida,comidaMala,pil)
+        punteo = funcionalidad(window,usuario,punteo,nodo,listaD,comida,comidaMala,pil)
+        
         menu(window)
         if(listaCircular.estaVacia()):
             listaCircular.agregarFinal(usuario)
@@ -100,7 +106,29 @@ while(opcion == -1):
         opcion = -1
     elif(opcion==54):
         #salida
-        pass    
+        pass 
+    elif(opcion==55):
+        #limpiar juego
+        fila.encolar(usuario,punteo)
+        usuario = ""
+        punteo = 0
+        juegoN = True
+        if(listaCircular.estaVacia() is not True):
+            listaCircular.cabezaLCD.siguiente = None
+            listaCircular.cabezaLCD = None
+        if(listaD.estaVacia() is not True):
+            listaD.cabezaListaD.siguiente = None
+            listaD.cabezaListaD = None
+        if(comida.estaVacia() is not True):
+            comida.cabezaListaD.siguiente = None
+            comida.cabezaListaD = None
+        if(comidaMala.estaVacia() is not True):
+            comidaMala.cabezaListaD.siguiente = None
+            comidaMala.cabezaListaD = None
+        if(pil.estaVacia() is not True):
+            pil.head.siguiente = None
+            pil.head = None                    
+        opcion=-1       
     else:
         opcion = -1
 

@@ -5,9 +5,9 @@ subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=record];
-Nodofunciono[label="{funciono,100| }"style = filled, fillcolor = "purple:blue"];
+Nodosanti[label="{santi,20| }"style = filled, fillcolor = "purple:blue"];
 NodoNULL[label="NULL}"style = filled, fillcolor = "purple:blue"];
-Nodofunciono->NodoNULL;
+Nodosanti->NodoNULL;
 label = "Cola";
 }
 }

@@ -3,6 +3,7 @@ import time
 from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN,KEY_ENTER
 from curses.textpad import Textbox, rectangle
 from random import randint
+estoyPausa = False
 def juego(window,usr):
     if(len(usr) is 0):  
         usr = noExisteUSR(window)
@@ -12,8 +13,9 @@ def juego(window,usr):
         print(str(usr))
         return usr
 
-def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=object,pil = object):
-    valP = 0
+def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida = object,comidaMala=object,pil = object):
+    curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
+    valP = puntos
     pts = "Score:"+str(valP)
     pts = pts.replace(' ','')
     pts = pts.replace('\n','')
@@ -24,19 +26,27 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
     usr = usr.replace('\t','')
     tit ="Snake Reload"       
     titulo(window,tit,usr,pts)
-    salida = KEY_RIGHT
-    posX=5
-    posY=5
-    snake="#"
-    curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    crearSnakeInicial(posX,posY,listaDoble)
-    insertarComida(listaComida)
-    imprimeAsteriscos(window,snake,listaDoble)
-    mostrarComida(window,listaComida)
-    insertarComida(comidaMala)
-    mostrarComidaM(window,comidaMala)
+    if(juegoN.estado is True):
+                salida = KEY_RIGHT
+                posX=5
+                posY=5
+                snake="#"
+                crearSnakeInicial(posX,posY,listaDoble)
+                insertarComida(listaComida)
+                imprimeAsteriscos(window,snake,listaDoble)
+                mostrarComida(window,listaComida)
+                insertarComida(comidaMala)
+                mostrarComidaM(window,comidaMala)
+    else:
+        salida=0
+        snake="#"
+        posX = listaDoble.cabezaListaD.posX
+        posY = listaDoble.cabezaListaD.posY
+        imprimeAsteriscos(window,snake,listaDoble)
+        mostrarComida(window,listaComida)
+        mostrarComidaM(window,comidaMala)           
     #salida = window.getch()
-    while(salida!=27):  
+    while(salida!=27): 
         window.timeout(evaluarNivel(valP))
         mov = window.getch()
         if(mov is not -1):
@@ -57,6 +67,8 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         print("comi")
+                        #curses.beep( )
+                        curses.beep( )
                         valP+=1
                         pts = "Score:"+str(valP)
                         pts = pts.replace(' ','')
@@ -97,6 +109,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -148,6 +161,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -189,6 +203,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -240,6 +255,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -281,6 +297,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -332,6 +349,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -373,6 +391,7 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
+                        curses.beep( )
                         print("comi")
                         valP+=1
                         pts = "Score:"+str(valP)
@@ -409,8 +428,11 @@ def funcionalidad(window,Usr,listaDoble=object,listaComida = object,comidaMala=o
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()             
-        #elif(salida==112 or salida == 80):
-                
+        elif(salida==112 or salida == 80):
+            salida = 0     
+            juegoN.estado = False
+            print("pause")
+    return valP              
                         
 
 def titulo(window,texto,usr,punteo):
@@ -531,3 +553,6 @@ def evaluarNivel(punteo):
                 return 100
         else:
                 return 75 
+
+def pausa():
+        return estoyPausa                
