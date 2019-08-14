@@ -12,7 +12,7 @@ class ListaDoble:
     #lista para desplazarse en el tablero de snake
     def __init__(self):
         #constructor que inicializa nodo cabeza
-        self.tamanio = 0
+        self.tamanio = -1
         self.cabezaListaD = None
 
     def estaVacia(self):
@@ -29,6 +29,7 @@ class ListaDoble:
 
         self.cabezaListaD = nuevo_nodo    
         self.tamanio +=1
+        print(str(self.tamanio))
         #print("agregado con exito al inicio")
 
     def agregarFinal(self,posicionX,posicionY):
@@ -77,6 +78,7 @@ class ListaDoble:
                 last = aux.anterior
                 aux.anterior = None
                 last.siguiente = None
+                self.tamanio-=1
                 return
             aux = aux.siguiente   
 

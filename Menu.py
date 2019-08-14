@@ -66,7 +66,7 @@ while(opcion == -1):
         usuario = juego(window,str(usuario))
         usuario = usuario.replace(' ','')
         usuario = usuario.replace('\n','')
-        punteo = funcionalidad(window,usuario,punteo,nodo,listaD,comida,comidaMala,pil)
+        punteo = funcionalidad(window,usuario,punteo,nodo,listaD,comida,comidaMala,pil,fila)
         
         menu(window)
         if(listaCircular.estaVacia()):
@@ -112,7 +112,7 @@ while(opcion == -1):
         fila.encolar(usuario,punteo)
         usuario = ""
         punteo = 0
-        juegoN = True
+        nodo.estado = True
         if(listaCircular.estaVacia() is not True):
             listaCircular.cabezaLCD.siguiente = None
             listaCircular.cabezaLCD = None

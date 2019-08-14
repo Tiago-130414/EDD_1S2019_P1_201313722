@@ -13,9 +13,10 @@ def juego(window,usr):
         print(str(usr))
         return usr
 
-def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida = object,comidaMala=object,pil = object):
+def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida = object,comidaMala=object,pil = object,fila = object):
     curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
     valP = puntos
+    choque = False
     pts = "Score:"+str(valP)
     pts = pts.replace(' ','')
     pts = pts.replace('\n','')
@@ -62,6 +63,10 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posX = posX+1
                 if(posX >= 59):
                     posX = 1
+                    choque = choqueSnake(window,listaDoble,fila)
+                    if(choque == True and listaDoble.tamanio>3):
+                        salida = 0
+                        perder(window)
                     listaDoble.agregarPrincipio(posX,posY)
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -100,11 +105,15 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         eliminarComida(comidaMala)
                         insertarComida(comidaMala)
                         mostrarComidaM(window,comidaMala)
-                    else:        
+                    else:     
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         listaDoble.eliminarFinal()
                 else:
+                    choque = choqueSnake(window,listaDoble,fila)
+                    if(choque == True and listaDoble.tamanio>3):
+                        salida = 0
+                        perder(window)
                     listaDoble.agregarPrincipio(posX,posY)    
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -157,6 +166,10 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posX = posX-1 
                 if(posX<=1):
                     posX = 58
+                    choque = choqueSnake(window,listaDoble,fila)
+                    if(choque == True and listaDoble.tamanio>3):
+                        salida = 0
+                        perder(window)
                     listaDoble.agregarPrincipio(posX,posY)
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -195,10 +208,15 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(comidaMala)
                         mostrarComidaM(window,comidaMala)    
                     else:
+                       
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()
                 else:
+                    choque = choqueSnake(window,listaDoble,fila)
+                    if(choque == True and listaDoble.tamanio>3):
+                        salida = 0 
+                        perder(window)   
                     listaDoble.agregarPrincipio(posX,posY)
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -235,8 +253,9 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         pil. desapilar()
                         eliminarComida(comidaMala)
                         insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)    
+                        mostrarComidaM(window,comidaMala)
                     else:
+                   
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()        
@@ -251,6 +270,11 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posY = posY-1
                 if(posY<=1):
                    posY=18
+                   choque = choqueSnake(window,listaDoble,fila)
+                   if(choque == True and listaDoble.tamanio>3):
+                        salida = 0
+                        perder(window)
+                   choqueSnake(window,listaDoble,fila)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -287,12 +311,16 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         pil. desapilar()
                         eliminarComida(comidaMala)
                         insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)     
+                        mostrarComidaM(window,comidaMala)    
                    else:
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()
                 else:
+                   choque = choqueSnake(window,listaDoble,fila)
+                   if(choque == True and listaDoble.tamanio>3):
+                        salida = 0 
+                        perder(window)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -345,6 +373,10 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posY = posY+1
                 if(posY>=19):
                    posY = 1     
+                   choque = choqueSnake(window,listaDoble,fila)
+                   if(choque == True and listaDoble.tamanio>3):
+                        salida = 0
+                        perder(window)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -387,6 +419,10 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()    
                 else:
+                   choque = choqueSnake(window,listaDoble,fila)
+                   if(choque == True and listaDoble.tamanio>3):
+                        salida = 0 
+                        perder(window)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -440,7 +476,6 @@ def titulo(window,texto,usr,punteo):
     curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) 
     pintarVentana(window)
     centro = round((60-len(texto))/2)
-    print(str(centro))
     window.addstr(0,centro,texto,curses.color_pair(3))
     window.addstr(0,centro+22,usr,curses.color_pair(3))
     window.addstr(0,centro-20,punteo,curses.color_pair(3))
@@ -554,5 +589,26 @@ def evaluarNivel(punteo):
         else:
                 return 75 
 
-def pausa():
-        return estoyPausa                
+def choqueSnake(window,listaDoble = object,fila = object):
+        choque = False
+        if(listaDoble.estaVacia()):
+                return
+        else:    
+                aux = listaDoble.cabezaListaD.siguiente
+                while(aux!=None):
+                        cabezitaX = listaDoble.cabezaListaD.posX
+                        cabezitaY = listaDoble.cabezaListaD.posY
+                        if(cabezitaX == aux.posX and cabezitaY == aux.posY):
+                                choque = True
+                                return choque
+                        aux = aux.siguiente     
+def perder(window):
+        texto = "G A M E  O V E R"
+        window.clear()
+        curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK) 
+        window.attron(curses.color_pair(3))
+        window.border(0)
+        window.attroff(curses.color_pair(3))
+        window.refresh() 
+        centro = round((60-len(texto))/2)
+        window.addstr(0,centro,texto,curses.color_pair(3))
