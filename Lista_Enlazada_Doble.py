@@ -29,7 +29,6 @@ class ListaDoble:
 
         self.cabezaListaD = nuevo_nodo    
         self.tamanio +=1
-        print(str(self.tamanio))
         #print("agregado con exito al inicio")
 
     def agregarFinal(self,posicionX,posicionY):
@@ -41,7 +40,6 @@ class ListaDoble:
         if self.cabezaListaD is None:
             nuevo_nodo.anterior = None
             self.cabezaListaD = nuevo_nodo
-            print("agregado con exito al final")
             self.tamanio +=1
             return
 

@@ -67,7 +67,6 @@ while(opcion == -1):
         usuario = usuario.replace(' ','')
         usuario = usuario.replace('\n','')
         punteo = funcionalidad(window,usuario,punteo,nodo,listaD,comida,comidaMala,pil,fila)
-        
         menu(window)
         if(listaCircular.estaVacia()):
             listaCircular.agregarFinal(usuario)
@@ -109,16 +108,14 @@ while(opcion == -1):
         pass 
     elif(opcion==55):
         #limpiar juego
-        fila.encolar(usuario,punteo)
+        #fila.encolar(usuario,punteo)
         usuario = ""
         punteo = 0
         nodo.estado = True
-        if(listaCircular.estaVacia() is not True):
-            listaCircular.cabezaLCD.siguiente = None
-            listaCircular.cabezaLCD = None
         if(listaD.estaVacia() is not True):
             listaD.cabezaListaD.siguiente = None
             listaD.cabezaListaD = None
+            listaD.tamanio =-1
         if(comida.estaVacia() is not True):
             comida.cabezaListaD.siguiente = None
             comida.cabezaListaD = None

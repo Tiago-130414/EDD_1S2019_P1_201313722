@@ -3,14 +3,13 @@ import time
 from curses import KEY_RIGHT,KEY_LEFT,KEY_UP,KEY_DOWN,KEY_ENTER
 from curses.textpad import Textbox, rectangle
 from random import randint
+import threading
 estoyPausa = False
 def juego(window,usr):
     if(len(usr) is 0):  
         usr = noExisteUSR(window)
-        print("hola" + str(usr))
         return usr
     else:
-        print(str(usr))
         return usr
 
 def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida = object,comidaMala=object,pil = object,fila = object):
@@ -63,10 +62,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posX = posX+1
                 if(posX >= 59):
                     posX = 1
+                    #choca y pierde
                     choque = choqueSnake(window,listaDoble,fila)
-                    if(choque == True and listaDoble.tamanio>3):
+                    if(choque == True and listaDoble.tamanio>=4):
                         salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                     listaDoble.agregarPrincipio(posX,posY)
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -85,35 +87,46 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                     elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
                     else:     
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         listaDoble.eliminarFinal()
                 else:
+                    #choca y pierde
                     choque = choqueSnake(window,listaDoble,fila)
-                    if(choque == True and listaDoble.tamanio>3):
+                    if(choque == True and listaDoble.tamanio>=4):
                         salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                     listaDoble.agregarPrincipio(posX,posY)    
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -131,26 +144,34 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                     elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi Mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)    
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)   
                     else:
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
@@ -166,10 +187,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posX = posX-1 
                 if(posX<=1):
                     posX = 58
+                    #choca y pierde
                     choque = choqueSnake(window,listaDoble,fila)
-                    if(choque == True and listaDoble.tamanio>3):
+                    if(choque == True and listaDoble.tamanio>=4):
                         salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                     listaDoble.agregarPrincipio(posX,posY)
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -187,36 +211,47 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                     elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)    
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)    
                     else:
                        
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()
                 else:
+                    #choca y pierde    
                     choque = choqueSnake(window,listaDoble,fila)
-                    if(choque == True and listaDoble.tamanio>3):
-                        salida = 0 
-                        perder(window)   
+                    if(choque == True and listaDoble.tamanio>=4):
+                        salida = 0
+                        perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                     listaDoble.agregarPrincipio(posX,posY)
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -234,28 +269,35 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                     elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
                     else:
-                   
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()        
@@ -270,10 +312,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posY = posY-1
                 if(posY<=1):
                    posY=18
+                   #choca y pierde
                    choque = choqueSnake(window,listaDoble,fila)
-                   if(choque == True and listaDoble.tamanio>3):
+                   if(choque == True and listaDoble.tamanio>=4):
                         salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                    choqueSnake(window,listaDoble,fila)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
@@ -292,35 +337,46 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                    elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)    
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)    
                    else:
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()
                 else:
+                   #choca y pierde     
                    choque = choqueSnake(window,listaDoble,fila)
-                   if(choque == True and listaDoble.tamanio>3):
-                        salida = 0 
+                   if(choque == True and listaDoble.tamanio>=4):
+                        salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -338,26 +394,34 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                    elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
                    else:
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
@@ -373,10 +437,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                 posY = posY+1
                 if(posY>=19):
                    posY = 1     
+                   #choca y pierde
                    choque = choqueSnake(window,listaDoble,fila)
-                   if(choque == True and listaDoble.tamanio>3):
+                   if(choque == True and listaDoble.tamanio>=4):
                         salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -394,35 +461,46 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                    elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
                    else:
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
                         listaDoble.eliminarFinal()    
                 else:
+                   #choca y pierde     
                    choque = choqueSnake(window,listaDoble,fila)
-                   if(choque == True and listaDoble.tamanio>3):
-                        salida = 0 
+                   if(choque == True and listaDoble.tamanio>=4):
+                        salida = 0
                         perder(window)
+                        fila.encolar(Usr,valP)
+                        #limpiarParaJuegoNuevo(listaDoble,listaComida,comidaMala,pil)
                    listaDoble.agregarPrincipio(posX,posY)
                    if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
@@ -440,26 +518,35 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         insertarComida(listaComida)
                         mostrarComida(window,listaComida)
                    elif(posX==posMX and posY==posMY):
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        imprimeAsteriscos(window,snake,listaDoble)  
-                        ultX = listaDoble.ultimoNodoX()
-                        ultY = listaDoble.ultimoNodoY()
-                        window.addstr(ultY,ultX," ")
-                        listaDoble.eliminarFinal()
-                        print("comi mal")
-                        valP-=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
-                        pil. desapilar()
-                        eliminarComida(comidaMala)
-                        insertarComida(comidaMala)
-                        mostrarComidaM(window,comidaMala)
+                        if(listaDoble.tamanio>3 and valP>0):
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                ultX = listaDoble.ultimoNodoX()
+                                ultY = listaDoble.ultimoNodoY()
+                                window.addstr(ultY,ultX," ")
+                                listaDoble.eliminarFinal()
+                                print("comi mal")
+                                valP-=1
+                                pts = "Score:"+str(valP)
+                                pts = pts.replace(' ','')
+                                pts = pts.replace('\n','')
+                                pts = pts.replace('\t','')
+                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pil. desapilar()
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+                        else:
+                                imprimeAsteriscos(window,snake,listaDoble)  
+                                window.addstr(ultY,ultX," ")    
+                                listaDoble.eliminarFinal()   
+                                eliminarComida(comidaMala)
+                                insertarComida(comidaMala)
+                                mostrarComidaM(window,comidaMala)
+
                    else:
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")    
@@ -585,7 +672,7 @@ def evaluarNivel(punteo):
         if(punteo <= 5):
                 return 200
         elif(punteo<=10):
-                return 100
+                return 1000
         else:
                 return 75 
 
@@ -601,7 +688,8 @@ def choqueSnake(window,listaDoble = object,fila = object):
                         if(cabezitaX == aux.posX and cabezitaY == aux.posY):
                                 choque = True
                                 return choque
-                        aux = aux.siguiente     
+                        aux = aux.siguiente    
+
 def perder(window):
         texto = "G A M E  O V E R"
         window.clear()
@@ -612,3 +700,17 @@ def perder(window):
         window.refresh() 
         centro = round((60-len(texto))/2)
         window.addstr(0,centro,texto,curses.color_pair(3))
+
+def limpiarParaJuegoNuevo(listaD = object,comida = object,comidaMala = object,pil = object):
+            if(listaD.estaVacia() is not True):
+                listaD.cabezaListaD.siguiente = None
+                listaD.cabezaListaD = None
+            if(comida.estaVacia() is not True):
+                comida.cabezaListaD.siguiente = None
+                comida.cabezaListaD = None
+            if(comidaMala.estaVacia() is not True):
+                comidaMala.cabezaListaD.siguiente = None
+                comidaMala.cabezaListaD = None
+            if(pil.estaVacia() is not True):
+                pil.head.siguiente = None
+                pil.head = None           
