@@ -17,9 +17,6 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
     valP = puntos
     choque = False
     pts = "Score:"+str(valP)
-    pts = pts.replace(' ','')
-    pts = pts.replace('\n','')
-    pts = pts.replace('\t','')
     usr = "Usr:"+Usr
     usr = usr.replace(' ','')
     usr = usr.replace('\n','')
@@ -47,6 +44,7 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
         mostrarComidaM(window,comidaMala)           
     #salida = window.getch()
     while(salida!=27): 
+        pts=""    
         window.timeout(evaluarNivel(valP))
         mov = window.getch()
         if(mov is not -1):
@@ -73,15 +71,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                     if(posX==posCX and posY==posCY):
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
-                        print("comi")
-                        #curses.beep( )
                         curses.beep( )
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        pts1=""
+                        pts1 = "Score:"+str(valP)
+                        print(pts1)
+                        window.addstr(0,4,"        ",curses.color_pair(6))        
+                        window.addstr(0,4,pts1,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -97,13 +93,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
-                                valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                valP-=1  
+                                pts2=""
+                                pts2= "Score:"+str(valP)
+                                print(pts2)
+                                window.addstr(0,4,"        ",curses.color_pair(6))        
+                                window.addstr(0,4,pts2,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -132,13 +127,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        pts3=""
+                        pts3= "Score:"+str(valP)
+                        print(pts3)
+                        window.addstr(0,4,"        ",curses.color_pair(6))
+                        window.addstr(0,4,pts3,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -154,13 +148,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
-                                valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                valP-=1   
+                                pts4=""
+                                pts4 = "Score:"+str(valP)
+                                print(pts4)
+                                window.addstr(0,4,"        ",curses.color_pair(6))
+                                window.addstr(0,4,pts4,curses.color_pair(6))      
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -199,13 +192,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        print("izquierda: "+str(valP))
+                        pts5=""
+                        pts5 = "Score:"+str(valP)
+                        window.addstr(0,4,"        ",curses.color_pair(6))
+                        window.addstr(0,4,pts5,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -221,13 +213,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
                                 valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                print("izquierda: "+str(valP))
+                                pts6=""
+                                pts6 = "Score:"+str(valP)
+                                window.addstr(0,4,"        ",curses.color_pair(6))
+                                window.addstr(0,4,pts6,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -257,13 +248,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        print("izquierda: "+str(valP))
+                        pts7=""
+                        pts7 = "Score:"+str(valP)
+                        window.addstr(0,4,"        ",curses.color_pair(6))
+                        window.addstr(0,4,pts7,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -279,13 +269,11 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
                                 valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                pts8=""
+                                pts8 = "Score:"+str(valP)  
+                                window.addstr(0,4,"         ",curses.color_pair(6))   
+                                window.addstr(0,4,pts8,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -325,13 +313,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        print("arriba: "+str(valP))
+                        pts9=""
+                        pts9 = "Score:"+str(valP)
+                        
+                        window.addstr(0,4,"        ",curses.color_pair(6))
+                        window.addstr(0,4,pts9,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -347,13 +335,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
                                 valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                print("arriba: "+str(valP))
+                                pts10 = ""
+                                pts10 = "Score:"+str(valP) 
+                                
+                                window.addstr(0,4,"         ",curses.color_pair(6))            
+                                window.addstr(0,4,pts10,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -382,13 +370,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        print("arriba: "+str(valP))
+                        pts11=""
+                        pts11 = "Score:"+str(valP)
+                        
+                        window.addstr(0,4,"        ",curses.color_pair(6))
+                        window.addstr(0,4,pts11,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -404,13 +392,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
                                 valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                print("arriba: "+str(valP))
+                                pts12=""
+                                pts12 = "Score:"+str(valP)
+                                window.addstr(0,4,"        ",curses.color_pair(6))
+                                window.addstr(0,4,pts12,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -449,13 +436,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        print("abajo: "+str(valP))
+                        pts13=""
+                        pts13 = "Score:"+str(valP)
+                        
+                        window.addstr(0,4,"         ",curses.color_pair(6))
+                        window.addstr(0,4,pts13,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -471,13 +458,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
                                 valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                print("abajo: "+str(valP))
+                                pts14=""
+                                pts14 = "Score:"+str(valP)
+                                
+                                window.addstr(0,4,"         ",curses.color_pair(6))
+                                window.addstr(0,4,pts14,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -506,13 +493,13 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                         imprimeAsteriscos(window,snake,listaDoble)  
                         window.addstr(ultY,ultX," ")
                         curses.beep( )
-                        print("comi")
                         valP+=1
-                        pts = "Score:"+str(valP)
-                        pts = pts.replace(' ','')
-                        pts = pts.replace('\n','')
-                        pts = pts.replace('\t','')
-                        window.addstr(0,4,pts,curses.color_pair(6))
+                        print("abajo: "+str(valP))
+                        pts15=""
+                        pts15 = "Score:"+str(valP)
+                        
+                        window.addstr(0,4,"        ",curses.color_pair(6))
+                        window.addstr(0,4,pts15,curses.color_pair(6))
                         pil.apilar(posCX,posCY)
                         eliminarComida(listaComida)
                         insertarComida(listaComida)
@@ -528,13 +515,12 @@ def funcionalidad(window,Usr,puntos,juegoN=object,listaDoble=object,listaComida 
                                 ultY = listaDoble.ultimoNodoY()
                                 window.addstr(ultY,ultX," ")
                                 listaDoble.eliminarFinal()
-                                print("comi mal")
                                 valP-=1
-                                pts = "Score:"+str(valP)
-                                pts = pts.replace(' ','')
-                                pts = pts.replace('\n','')
-                                pts = pts.replace('\t','')
-                                window.addstr(0,4,pts,curses.color_pair(6))
+                                print("abajo: "+str(valP))
+                                pts16=""
+                                pts16 = "Score:"+str(valP)
+                                window.addstr(0,4,"         ",curses.color_pair(6))
+                                window.addstr(0,4,pts16,curses.color_pair(6))
                                 pil. desapilar()
                                 eliminarComida(comidaMala)
                                 insertarComida(comidaMala)
@@ -672,7 +658,7 @@ def evaluarNivel(punteo):
         if(punteo <= 5):
                 return 200
         elif(punteo<=10):
-                return 1000
+                return 100       
         else:
                 return 75 
 

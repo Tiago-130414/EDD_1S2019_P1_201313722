@@ -5,11 +5,11 @@ subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=record];
-Nodogil[label="{gil,1| }"style = filled, fillcolor = "purple:blue"];
-Nodosanti[label="{santi,3| }"style = filled, fillcolor = "purple:blue"];
-Nodosanti[label="{santi,2| }"style = filled, fillcolor = "purple:blue"];
+Nodosanti[label="{santi,21| }"style = filled, fillcolor = "purple:blue"];
+Nodosanti[label="{santi,21| }"style = filled, fillcolor = "purple:blue"];
+Nodosanti[label="{santi,21| }"style = filled, fillcolor = "purple:blue"];
 NodoNULL[label="NULL}"style = filled, fillcolor = "purple:blue"];
-Nodogil->Nodosanti;
+Nodosanti->Nodosanti;
 Nodosanti->Nodosanti;
 Nodosanti->NodoNULL;
 label = "Cola";

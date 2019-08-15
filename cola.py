@@ -21,12 +21,12 @@ class Cola:
                 self.primero = nuevo_nodo
                 self.ultimo = self.primero
                 self.contar+=1
-                print("primer nodo agregado")
+                #print("primer nodo agregado")
                 return
             nuevo_nodo.siguiente = self.ultimo
             self.ultimo = nuevo_nodo
             self.contar+=1
-            print("nodo agregado")
+            #print("nodo agregado")
         else:
             self.desencolar()
             nuevo_nodo.siguiente = self.ultimo

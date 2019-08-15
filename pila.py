@@ -15,14 +15,14 @@ class Pila:
         nuevo = NodoPila(posx,posy)
         nuevo.siguiente = self.head
         self.head = nuevo
-        print("elemento apilado")
+        #print("elemento apilado")
     
     def desapilar(self):
         if (self.estaVacia()): 
             print("Pila Vacia") 
             return
         self.head = self.head.siguiente 
-        print("desapilado")
+        #print("desapilado")
 
     def mostrarPila(self):
         aux = self.head

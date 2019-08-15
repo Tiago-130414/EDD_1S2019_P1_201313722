@@ -49,7 +49,7 @@ class ListaDoble:
         last.siguiente = nuevo_nodo
         nuevo_nodo.anterior = last        
         self.tamanio +=1    
-        print("agregado con exito al final")
+        #print("agregado con exito al final")
 
     def mostrar (self, nodo):
         while (nodo is not None):

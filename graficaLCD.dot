@@ -5,9 +5,9 @@ subgraph cluster_0{
 style=filled;
 color = lightgrey;
 node[shape=record];
-Nodosanti[label="{ |santi| }"style = filled, fillcolor = "red:blue"];
-Nodosanti->Nodosanti;
-Nodosanti->Nodosanti;
+Nodoluis[label="{ |luis| }"style = filled, fillcolor = "red:blue"];
+Nodoluis->Nodoluis;
+Nodoluis->Nodoluis;
 label = "Lista Circular Doblemente Enlazada";
 }
 }
